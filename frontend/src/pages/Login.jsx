@@ -1,8 +1,43 @@
 import React from "react";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { api } from "../services/api"; // Importe a API
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Impede o recarregamento da página
+    setError(""); // Limpa erros antigos
+
+    if (!email || !password) {
+      setError("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    try {
+      // 7. Chame a API (lembre-se: /api/auth/login)
+      const response = await api.post("/auth/login", { email, password });
+
+      // 8. SALVE O TOKEN!
+      localStorage.setItem("authToken", response.data.token);
+
+      // 9. Redirecione para o Dashboard
+      navigate("/"); // Redireciona para a rota raiz (Dashboard)
+
+    } catch (err) {
+      // 10. Trate os erros
+      if (err.response && err.response.data.error) {
+        setError(err.response.data.error);
+      } else {
+        setError("Erro ao fazer login. Tente novamente.");
+      }
+    }
+  };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-linear-to-br from-teal-50 to-[#F0FBF8]">
 
@@ -23,7 +58,7 @@ function Login() {
         </h2>
 
   
-        <form className="space-y-6" action="#" method="POST">
+        <form className="space-y-6" onSubmit={handleLogin}>
           
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -40,6 +75,8 @@ function Login() {
                 name="email"
                 type="email"
                 autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="seu@email.com"
                 className="block w-full py-2 pl-10 pr-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -63,6 +100,8 @@ function Login() {
                 name="password"
                 type="password"
                 autoComplete="current-password"
+                value={password} // Você não tinha isso, adicionei
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="Sua senha"
                 className="block w-full py-2 pl-10 pr-10 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -75,10 +114,13 @@ function Login() {
               </div>
             </div>
           </div>
+          {error && (
+            <p className="text-sm text-center text-red-600">{error}</p>
+          )}
 
           {/* Botão de Entrar */}
           <div>
-            <Button className="w-full">
+            <Button type="submit" className="w-full">
                 Entrar
             </Button>
           </div>
