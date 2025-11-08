@@ -1,0 +1,17 @@
+tela login
+
+bg:
+#F0FBF8
+btn:
+#3B82F6
+card:
+#FFFFFF
+fontcolor:
+#1E293B
+
+------------------------------
+
+tela dashboard
+
+cor padrao de fachadas/butoes:
+#2E70EF
