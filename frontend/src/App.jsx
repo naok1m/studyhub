@@ -1,16 +1,14 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom' // 1. Importe o Outlet
 import './App.css'
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
+// Não precisamos mais importar Login, Register ou Dashboard aqui
 
 function App() {
-
   return (
     <div className="App">
-      <Dashboard />
+      <Outlet />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

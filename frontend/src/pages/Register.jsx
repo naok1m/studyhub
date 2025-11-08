@@ -1,6 +1,7 @@
 import React from "react";
 
 import Button from "../components/Button";
+import { Link } from "react-router-dom";
 
 function Register() {
     return (
@@ -114,6 +115,12 @@ function Register() {
             </Button>
           </div>
         </form>
+        <p className="text-sm text-center text-gray-600 ">
+          Já tem uma conta?
+          <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500 p-2">
+            Entrar
+          </Link>
+        </p>
       </div>
         </div>
     );

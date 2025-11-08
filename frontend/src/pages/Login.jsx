@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../components/Button";
+import { Link } from "react-router-dom";
 
 function Login() {
   return (
@@ -85,9 +86,9 @@ function Login() {
 
         <p className="text-sm text-center text-gray-600 ">
           Não tem uma conta?
-          <a href="#" className="font-medium text-blue-600 hover:text-blue-500 p-2">
+          <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500 p-2">
             Cadastre-se
-          </a>
+          </Link>
         </p>
 
         {/* Bloco de Informação "Demo" */}
