@@ -133,13 +133,6 @@ function Login() {
           </Link>
         </p>
 
-        {/* Bloco de Informação "Demo" */}
-        <div className="p-4 text-sm text-gray-700 bg-gray-100 rounded-md">
-          <strong>Demo:</strong> Use qualquer email/senha para testar
-          <span className="block mt-1 text-xs font-mono text-gray-600">
-            Ex: demo@studyhub.com / 123456
-          </span>
-        </div>
 
       </div>
     </div>
